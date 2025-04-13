@@ -115,7 +115,7 @@ const Hero = () => {
               }}
             >
               <img 
-                src="https://github.com/gamkers/hackcatv3/blob/main/src/components/image1.png" 
+                src="https://raw.githubusercontent.com/gamkers/hackcatv3/refs/heads/main/src/components/image1.png" 
                 alt="HACK_CAT V3" 
                 className="w-full h-full object-contain transform transition-transform duration-300 shadow-lg rounded-xl"
                 style={{ transform: 'translateZ(20px)' }}
