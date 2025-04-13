@@ -3,6 +3,19 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, ShieldCheck, Truck, ReceiptText } from "lucide-react";
 
 const CallToAction = () => {
+  // Function to handle button click and redirect to the store
+  const handleGetYoursClick = () => {
+    window.open("https://store.hackgears.in/product/hack_cat-v3/", "_blank");
+  };
+
+  // Function to scroll to features section
+  const scrollToFeatures = () => {
+    const featuresSection = document.getElementById('features');
+    if (featuresSection) {
+      featuresSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="cta" className="py-24 bg-gradient-to-r from-gray-900 to-slate-800 text-white">
       <div className="container-custom text-center">
@@ -13,13 +26,17 @@ const CallToAction = () => {
         </p>
         
         <div className="flex flex-wrap justify-center gap-6 mb-16">
-          <Button className="cta-button text-lg px-10 py-7 rounded-full">
+          <Button 
+            className="cta-button text-lg px-10 py-7 rounded-full"
+            onClick={handleGetYoursClick}
+          >
             Get Yours Now <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
           
           <Button 
             variant="outline" 
             className="bg-transparent text-white hover:bg-white/10 border-2 border-white/50 text-lg px-10 py-7 rounded-full"
+            onClick={scrollToFeatures}
           >
             See Features
           </Button>

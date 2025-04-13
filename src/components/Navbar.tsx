@@ -41,13 +41,13 @@ const Navbar = () => {
               <a href="#features" className="font-medium hover:text-[hsl(var(--cyber-green))] transition-colors">Features</a>
             </li>
             <li>
-              <a href="#specs" className="font-medium hover:text-[hsl(var(--cyber-green))] transition-colors">Specs</a>
+              <a href="#use-cases" className="font-medium hover:text-[hsl(var(--cyber-green))] transition-colors">Applications</a>
             </li>
           </ul>
         </nav>
         
         <div className="cta">
-          <Button className="cta-button">
+          <Button className="cta-button" onClick={() => window.open("https://store.hackgears.in/product/hack_cat-v3/", "_blank")}>
             Get Yours <ArrowRight className="ml-1 h-4 w-4" />
           </Button>
         </div>

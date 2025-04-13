@@ -1,8 +1,44 @@
 
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { useEffect, useState, useRef } from "react";
 
 const Hero = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const imageRef = useRef<HTMLDivElement>(null);
+  
+  // Function to handle mouse movement
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+      
+      // Calculate the position relative to the center of the screen
+      const xRotation = ((clientY - windowHeight / 2) / windowHeight) * 10; // -5 to 5 degrees
+      const yRotation = ((clientX - windowWidth / 2) / windowWidth) * -10; // -5 to 5 degrees
+      
+      setMousePosition({ x: yRotation, y: xRotation });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
+  // Function to handle button click and redirect to the store
+  const handleBuyNowClick = () => {
+    window.open("https://store.hackgears.in/product/hack_cat-v3/", "_blank");
+  };
+
+  // Function to handle button click and redirect to Instagram
+  const handleWatchDemoClick = () => {
+    window.open("https://www.instagram.com/hackgears/", "_blank");
+  };
+
   return (
     <section className="relative min-h-screen flex items-center pt-20">
       {/* Background gradient */}
@@ -26,20 +62,40 @@ const Hero = () => {
           </div>
           
           <div className="flex flex-wrap gap-4">
-            <Button className="cta-button">
+            <Button 
+              className="cta-button"
+              onClick={handleBuyNowClick}
+            >
               Buy Now <ArrowRight className="ml-1 h-4 w-4" />
             </Button>
             
-            <Button variant="outline" className="rounded-full px-7 py-6 border-2 hover:bg-gray-50 transition-all">
-              Watch Demo
+            <Button 
+              variant="outline" 
+              className="rounded-full px-7 py-6 border-2 hover:bg-gray-50 transition-all"
+              onClick={handleWatchDemoClick}
+            >
+              Watch Demo <Instagram className="ml-1 h-4 w-4" />
             </Button>
           </div>
           
           <div className="flex items-center space-x-4 text-sm">
             <div className="flex -space-x-2">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="w-8 h-8 rounded-full bg-gray-300 border-2 border-white"></div>
-              ))}
+              <Avatar className="border-2 border-white">
+                <AvatarImage src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100" alt="Security professional 1" />
+                <AvatarFallback>DP</AvatarFallback>
+              </Avatar>
+              <Avatar className="border-2 border-white">
+                <AvatarImage src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100" alt="Security professional 2" />
+                <AvatarFallback>SP</AvatarFallback>
+              </Avatar>
+              <Avatar className="border-2 border-white">
+                <AvatarImage src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=100" alt="Security professional 3" />
+                <AvatarFallback>JD</AvatarFallback>
+              </Avatar>
+              <Avatar className="border-2 border-white">
+                <AvatarImage src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?q=80&w=100" alt="Security professional 4" />
+                <AvatarFallback>RK</AvatarFallback>
+              </Avatar>
             </div>
             <p className="text-muted-foreground">
               <span className="font-semibold text-black">500+</span> security professionals trust HACK_CAT
@@ -50,11 +106,19 @@ const Hero = () => {
         <div className="flex items-center justify-center lg:justify-end">
           <div className="relative w-full max-w-xl mx-auto aspect-square">
             <div className="absolute w-full h-full rounded-full bg-[hsl(var(--cyber-green)/0.05)] blur-3xl"></div>
-            <div className="relative w-full h-full flex items-center justify-center">
+            <div 
+              ref={imageRef} 
+              className="relative w-full h-full flex items-center justify-center transition-transform duration-300 ease-out"
+              style={{ 
+                transform: `perspective(1000px) rotateX(${mousePosition.y}deg) rotateY(${mousePosition.x}deg)`,
+                transformStyle: 'preserve-3d'
+              }}
+            >
               <img 
-                src="/src/components/image1.png" 
+                src="https://github.com/gamkers/hackcatv3/blob/main/src/components/image1.png" 
                 alt="HACK_CAT V3" 
-                className="w-full h-full object-contain transform hover:scale-105 transition-transform duration-300 rounded-xl shadow-lg"
+                className="w-full h-full object-contain transform transition-transform duration-300 shadow-lg rounded-xl"
+                style={{ transform: 'translateZ(20px)' }}
               />
             </div>
           </div>
@@ -70,4 +134,3 @@ const Hero = () => {
 };
 
 export default Hero;
-
